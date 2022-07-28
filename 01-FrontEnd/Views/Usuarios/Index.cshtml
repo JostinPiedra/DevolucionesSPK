@@ -1,0 +1,53 @@
+﻿@model List<UsuarioViewModel>
+@{
+    ViewBag.Title = "Listado de usuarios";
+}
+
+<!-- Page Heading -->
+<h1 class="h3 mb-2 text-gray-800">Listado de usuarios</h1>
+<p class="mb-4">
+    A continuación podrá visualizar el listado de usuarios en formato tabla.
+</p>
+
+<div class="text-right">
+    <a href="@Url.Action("Register","Account")" class="btn btn-success btn-circle btn-sm">
+        <i class="fas fa-plus-circle"></i>
+    </a>
+</div>
+
+<hr />
+<div class="card shadow mb-a">
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                <thead>
+                    <tr>
+                        <th scope="col">Nombre</th>
+                        <th scope="col">Correo</th>
+                        <th scope="col">Rol</th>
+                        <th scope="col">Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>@item.Nombre</td>
+                            <td>@item.Email</td>
+                            <td>@item.Rol</td>
+                            <td>
+                                <a href="@Url.Action("Edit","Usuarios", new { @id = item.Id })" class="btn btn-primary btn-circle btn-sm">
+                                <i class="fas fa-pen"></i>
+                                </a>
+                                <a href="@Url.Action("Delete","Usuarios", new { @id = item.Id })" class="btn btn-danger btn-circle btn-sm" 
+                                   onclick="return confirm('Está seguro de eliminar: @item.Nombre ?')">
+                                    <i class="fas fa-trash"></i>
+                                </a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

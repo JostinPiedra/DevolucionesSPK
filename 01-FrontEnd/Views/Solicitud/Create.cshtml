@@ -1,0 +1,97 @@
+﻿@{
+    ViewBag.Title = "Crear solicitud de devolución";
+    var user = CurrentUserHelper.Get;
+}
+
+<script type="text/javascript">
+    function AgregarFila() {
+        var tabla = document.getElementById("productoGrid");
+        var fila = tabla.insertRow(0);
+        var celda = fila.insertCell(0);
+    }
+</script>
+
+<a href="@Url.Action("Index","Solicitud")"><i class="fas fa-arrow-circle-left"> Regresar</i></a>
+<hr />
+
+<div class="card o-hidden border-0 shadow-lg my-0">
+    <div class="card-body p-0">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="p-5">
+                    <div class="text-center">
+                        <h1 class="h4 text-gray-900 mb-4">Solicitud de devolución de mercaderia.</h1>
+                    </div>
+                    <form method="post" action="~/Solicitud/Create">
+                        <div class="form-group row">
+                            <div class="col-md-2">
+                                <label for="fechaIngresoSolicitud" class="col-form-control">Fecha solicitud:</label>
+                            </div>
+                            <div class="col-md-6">
+                                <input type="date" class="form-control form-control-sm" id="fechaIngresoSolicitud"
+                                       name="FechaSolicitud" value="@DateTime.Now.ToString("yyyy-MM-dd")" />
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-md-2">
+                                <label for="facturaSolicitud" class="col-form-control">Factura:</label>
+                            </div>
+                            <div class="col-sm-6">
+                                <input type="text" class="form-control form-control-sm" id="facturaSolicitud"
+                                       name="Factura" />
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-md-2">
+                                <label for="fechaFacturaSolicitud" class="col-form-control">Fecha factura:</label>
+                            </div>
+                            <div class="col-sm-6">
+                                <input type="date" class="form-control form-control-sm" id="fechaFacturaSolicitud"
+                                       name="FechaFactura" />
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <button id="addRow" onclick="AgregarFila()"><i class="fas fa-plus"></i></button>
+                            <table class="table table-bordered" cellspacing="0" id="productoGrid">
+                                <thead>
+                                    <tr>
+                                        <th>Producto</th>
+                                        <th>Cantidad</th>
+                                        <th>Motivo</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>
+                                            <input type="text" class="form-control form-control-sm" id="productoSolicitud"
+                                                   name="Producto" />
+                                        </td>
+                                        <td>
+                                            <input type="text" class="form-control form-control-sm" id="cantidadSolicitud"
+                                                   name="Cantidad" />
+                                        </td>
+                                        <td>
+                                            <input type="text" class="form-control form-control-sm" id="motivoSolicitud"
+                                                   name="MotivoSolicitud" />
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-md-2">
+                                <label for="observacionSolicitud" class="col-form-control">Observación:</label>
+                            </div>
+                            <div class="col-sm-6">
+                                <input type="text" class="form-control form-control-sm" id="observacionSolicitud"
+                                       name="Observacion" />
+                            </div>
+                        </div>
+                        <button class="btn btn-success">Crear</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

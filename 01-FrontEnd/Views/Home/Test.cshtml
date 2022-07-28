@@ -1,0 +1,27 @@
+﻿@{
+    CurrentUser user = CurrentUserHelper.Get;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@{
+    ViewBag.Title = "Home Page";
+}
+
+@if (Request.IsAuthenticated)
+{
+
+    <div class="jumbotron">
+        <h1>@Parameters.ProjectName</h1>
+        <p>Bienvenido <b>@user.Name</b>.<br />Bienvenido al sistema de devoluciones de mercaderia.</p>
+    </div>
+}
+else
+{
+    <div class="col-lg-12">
+        <div class="jumbotron">
+            <h2>Bienvenido al sistema de devoluciones de mercaderia.</h2>
+            <p>Si tiene usuario por favor inicie sesión <a href="@Url.Action("Login","Account", new { @id = "loginLink" })">aquí</a> para utilizar el sistema.</p>
+            <br />
+            <p>Gracias!</p>
+        </div>
+    </div>
+}

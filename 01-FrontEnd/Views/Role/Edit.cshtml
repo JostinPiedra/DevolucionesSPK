@@ -1,0 +1,36 @@
+﻿@model RoleViewModel
+@{
+    ViewBag.Title = "Editar roles";
+}
+
+<a href="@Url.Action("Index","Role")"><i class="fas fa-arrow-circle-left"> Regresar</i></a>
+<hr />
+
+<div class="card o-hidden border-0 shadow-lg my-0">
+    <div class="card-body p-0">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="p-5">
+                    <div class="text-center">
+                        <h1 class="h4 text-gray-900 mb-4">Editar: @Model.Name.</h1>
+                    </div>
+                    @using (Html.BeginForm("Edit", "Role", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+                    {
+                        @Html.AntiForgeryToken()
+                        @*@Html.ValidationSummary("", new { @class = "text-danger" })*@
+                        <div class="form-group row">
+                            <div class="col-md-2">
+                                <label for="rol" class="col-form-control">Rol:</label>
+                            </div>
+                            <div class="col-md-6">
+                                <input type="text" id="rol" class="form-control form-control-sm"
+                                       name="Name" value="@Model.Name"/>
+                            </div>
+                        </div>
+                        <button class="btn btn-success">Editar</button>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

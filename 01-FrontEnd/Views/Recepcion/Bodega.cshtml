@@ -1,0 +1,67 @@
+﻿@{
+    ViewBag.Title = "Recepción de bodega";
+}
+
+<div class="container">
+    <h2>Informe de devoluciones de mercaderia.</h2>
+
+    <div>
+        @using (Html.BeginForm("GenerarInformeBodega", "Recepcion", FormMethod.Post))
+        {
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <div class="form-group">
+                                <label>Fecha recepción bodega:</label>
+                                @DateTime.Now.ToString("dd/MM/yyyy")
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <div class="form-group">
+                                <label>Firma de bodega:</label>
+                                <input value="" type="number" name="Cantidad" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <div class="form-group">
+                                <label>Fecha recepción facturación:</label>
+                                <input value="" type="text" name="Producto" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <div class="form-group">
+                                <label>Firma de facturación:</label>
+                                <input value="" type="text" name="MotivoDevolucion" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <div class="form-group">
+                                <label>Ingreso a bodega:</label>
+                                <input value="" type="text" name="Factura" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <div class="form-group">
+                                <div class="text-left">
+                                    <input class="btn btn-info" value="Generar" type="submit" name="Generar" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+

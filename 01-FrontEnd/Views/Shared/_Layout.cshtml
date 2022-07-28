@@ -1,0 +1,197 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>@ViewBag.Title - @Parameters.ProjectName</title>
+    <meta name="description" content="@ViewBag.Description" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Custom fonts for this template-->
+    <link href="~/Assets/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+          rel="stylesheet">
+
+    <!-- Custom styles for this template-->
+    <link href="~/Assets/css/sb-admin-2.min.css" rel="stylesheet">
+    <link href="~/Assets/vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet" />
+    <link href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css" rel="stylesheet" />
+
+    <style>
+        #loading {
+            position: fixed;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: rgba(241, 241, 241, 0.48);
+            z-index: 2000;
+            overflow: hidden;
+        }
+
+            #loading img {
+                position: absolute;
+                top: 0;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                margin: auto;
+            }
+    </style>
+
+</head>
+<body id="page-top">
+    <!-- Page Wrapper -->
+    <div id="wrapper">
+
+        @Html.Partial("_Sidebar")
+
+        <!-- Content Wrapper -->
+        <div id="content-wrapper" class="d-flex flex-column">
+
+            <!-- Main Content -->
+            <div id="content">
+                @Html.Partial("_Topbar")
+
+                <!-- Begin Page Content -->
+                <div class="container-fluid">
+                    <div id="loading">
+                        <img src="~/Assets/img/loader.gif" />
+                    </div>
+                    @RenderBody()
+                </div>
+                <!-- /.container-fluid -->
+
+            </div>
+            <!-- End of Main Content -->
+            <!-- Footer -->
+            <footer class="sticky-footer bg-white">
+                <div class="container my-auto">
+                    <div class="copyright text-center my-auto">
+                        <span>&copy; @DateTime.Now.Year - <b>@Parameters.ProjectName</b> @Parameters.ProjectVersion</span>
+                    </div>
+                </div>
+            </footer>
+            <!-- End of Footer -->
+        </div>
+        <!-- End of Content Wrapper -->
+    </div>
+    <!-- End of Content Wrapper -->
+    <!-- Scroll to Top Button-->
+    <a class="scroll-to-top rounded" href="#page-top">
+        <i class="fas fa-angle-up"></i>
+    </a>
+
+    <!-- Logout Modal-->
+    <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+         aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">¿Desea cerrar sesión?</h5>
+                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+                <div class="modal-body">Presiona "cerrar sesión" si deseas finalizar tú sesión.</div>
+                <div class="modal-footer">
+                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancelar</button>
+                    @using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { @id = "logoutForm" }))
+                    {
+                        @Html.AntiForgeryToken()
+                        <a class="btn btn-primary" href="javascript:document.getElementById('logoutForm').submit()">Cerrar sesión</a>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap core JavaScript-->
+    @*<script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>*@
+    <script src="~/Assets/vendor/jquery/jquery.min.js"></script>
+    <script src="~/Assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Core plugin JavaScript-->
+    <script src="~/Assets/vendor/jquery-easing/jquery.easing.min.js"></script>
+
+    <!-- Custom scripts for all pages-->
+    <script src="~/Assets/js/sb-admin-2.min.js"></script>
+
+    <!-- Page level plugins -->
+    @*<script src="~/Assets/vendor/chart.js/Chart.min.js"></script>*@
+    <script src="~/Assets/vendor/datatables/jquery.dataTables.min.js"></script>
+    <script src="~/Assets/vendor/datatables/dataTables.bootstrap4.min.js"></script>
+
+    <!-- Page level custom scripts -->
+    @*<script src="~/Assets/js/demo/chart-area-demo.js"></script>
+        <script src="~/Assets/js/demo/chart-pie-demo.js"></script>*@
+    <script src="~/Assets/js/demo/datatables-demo.js"></script>
+
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
+
+</body>
+</html>
+
+<script>
+    //var invocation = new XMLHttpRequest();
+    //var url = 'http://192.168.100.72:81/WeatherForecast';
+
+    function showLoader() {
+        $('#loading').show();
+    }
+    function fadeOutLoader() {
+        $('#loading').fadeOut();
+    }
+    function hideLoader() {
+        $('#loading').hide();
+    }
+    $(document).ready(function () {
+        hideLoader();
+    });
+    $(document).on('click', '#btnExcelUpload', function () {
+        if (window.FormData !== undefined) {
+            var fileUpload = $("#excelFile").get(0);
+            if ($("#excelFile").get(0).files.length == 0) {
+                toastr.error("Por favor cargue un archivo");
+                return;
+            }
+            showLoader();
+            var files = fileUpload.files;
+            var fileData = new FormData();
+            for (var i = 0; i < files.length; i++) {
+                fileData.append(files[i].name, files[i]);
+            }
+            $.ajax({
+                url: 'GuardarExcel',
+                type: "POST",
+                contentType: false,
+                processData: false,
+                data: fileData,
+                success: function (result) {
+                    fadeOutLoader();
+                    if (result != null) {
+                        toastr.success("Se subio exitosamente el archivo Excel!!");
+                    }
+                    else {
+                        toastr.error("Algo salio mal. Contactar con servicio tecnico!");
+                    }
+                },
+                error: function (err) {
+                    fadeOutLoader();
+                    toastr.error("Algo salio mal. Contactar con servicio tecnico!");
+                }
+            });
+        } else {
+            toastr.error("FormData no es valido para el navegador...!");
+        }
+    });
+    //$(document).on('click', '#WebApi', function () {
+    //    fetch(url, {mode: 'cors'})
+    //        .then((resp) => resp.json())
+    //        .then(function (data) {
+    //            console.log(data);
+    //        })
+    //        .catch(function (error) {
+    //            console.log(error);
+    //        });
+    //});
+</script>

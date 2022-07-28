@@ -1,0 +1,59 @@
+﻿@{
+    ViewBag.Title = "Recepción de Técnico";
+}
+
+<div>
+    <h2>Informe de devoluciones de mercaderia.</h2>
+
+    <div>
+        @using (Html.BeginForm("GenerarInformeTecnico", "Recepcion", FormMethod.Post))
+        {
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <div class="form-group">
+                                <label>Fecha entrega del técnico:</label>
+                                @DateTime.Now.ToString("dd/MM/yyyy")
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <div class="form-group">
+                                <label>Firma recepción del técnico:</label>
+                                <input value="" type="number" name="Cantidad" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <div class="form-group">
+                                <label>Detalle de trabajo técnico:</label>
+                                <input value="" type="text" name="Producto" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <div class="form-group">
+                                <label>Firma del técnico:</label>
+                                <input value="" type="text" name="MotivoDevolucion" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <div class="form-group">
+                                <div class="text-left">
+                                    <input class="btn btn-info" value="Generar" type="submit" name="Generar" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+

@@ -1,0 +1,108 @@
+﻿@model SolicitudViewModel
+@{
+    ViewBag.Title = "Detalle de solicitud";
+}
+
+<a href="@Url.Action("Index","Solicitud")"><i class="fas fa-arrow-circle-left"> Regresar</i></a>
+<hr />
+
+<div class="card o-hidden border-0 shadow-lg my-0">
+    <div class="card-body p-0">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="p-5">
+                    <div class="text-center">
+                        <h1 class="h4 text-gray-900 mb-4">Informe de solicitud de mercaderia.</h1>
+                    </div>
+                    <form>
+                        <div class="form-group row">
+                            <div class="col-md-2">
+                                <label for="fechaIngresoDevolucion" class="col-form-control">Fecha solicitud:</label>
+                            </div>
+                            <div class="col-md-6">
+                                <input type="text" class="form-control form-control-sm" id="fechaIngresoSolicitu"
+                                       value="@Model.FechaSolicitud" disabled />
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-md-2">
+                                <label for="facturaDevolucion" class="col-form-control">Factura:</label>
+                            </div>
+                            <div class="col-sm-6">
+                                <input type="text" class="form-control form-control-sm" id="facturaDevolucion"
+                                       value="@Model.Factura" disabled />
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-md-2">
+                                <label for="fechaFacturaDevolucion" class="col-form-control">Fecha factura:</label>
+                            </div>
+                            <div class="col-sm-6">
+                                <input type="text" class="form-control form-control-sm" id="fechaFacturaDevolucion"
+                                       value="@Model.FechaFactura" disabled />
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>Producto</th>
+                                        <th>Cantidad</th>
+                                        <th>Motivo</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach(var item in Model.ProductoDataGrid) 
+                                    {
+                                        <tr>
+                                            <td>@item.Producto</td>
+                                            <td>@item.Cantidad</td>
+                                            <td>@item.Motivo</td>
+                                        </tr>                                    
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-md-2">
+                                <label for="cantidadDevolucion" class="col-form-control">Cantidad:</label>
+                            </div>
+                            <div class="col-sm-6">
+                                <input type="text" class="form-control form-control-sm" id="cantidadDevolucion"
+                                       value="@Model.Cantidad" disabled />
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-md-2">
+                                <label for="productoDevolucion" class="col-form-control">Producto:</label>
+                            </div>
+                            <div class="col-sm-6">
+                                <input type="text" class="form-control form-control-sm" id="productoDevolucion"
+                                       value="@Model.Producto" disabled />
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-md-2">
+                                <label for="motivoDevolucion" class="col-form-control">Motivo devolución:</label>
+                            </div>
+                            <div class="col-sm-6">
+                                <input type="text" class="form-control form-control-sm" id="motivoDevolucion"
+                                       value="@Model.MotivoSolicitud" disabled />
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-md-2">
+                                <label for="responsableRecepcionDevolucion" class="col-form-control">Responsable recepción:</label>
+                            </div>
+                            <div class="col-sm-6">
+                                <input type="text" class="form-control form-control-sm" id="responsableRecepcionDevolucion"
+                                       value="@Model.Observacion" disabled />
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
